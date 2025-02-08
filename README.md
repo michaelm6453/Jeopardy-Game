@@ -1,11 +1,14 @@
-# Jeopardy-Game
-Group Assignment for Operating Systems. Game of Jeopardy. 
+# Jeopardy Game - Operating Systems Assignment
 
-Members: 
+## Group 4
 
-Michael Morra - 100815372 - michaelm6453
-Saieason Sritharan - 100741389 -
-Cam Edwards - 100779399 - 
-Destiny Mekwunye - 100825222 -
+### Group Members
+
+| Name                | Student ID  | GitHub Handle       |
+|---------------------|------------|---------------------|
+| Michael Morra      | 100815372   | [michaelm6453](https://github.com/michaelm6453) |
+| Saieason Sritharan | 100741389   | -                   |
+| Cam Edwards        | 100779399   | -                   |
+| Destiny Mekwunye   | 100825222   | -                   |
 
 
