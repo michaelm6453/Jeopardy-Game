@@ -17,27 +17,25 @@
 #define BUFFER_LEN 256
 #define NUM_PLAYERS 4
 
-// Put global environment variables here
+// Tokenizes user input to extract the actual answer after "what is" or "who is"
+void tokenize(char *input, char *answer) {
+    char *prefix1 = "what is ";
+    char *prefix2 = "who is ";
 
-// Processes the answer from the user containing what is or who is and tokenizes it to retrieve the answer.
-void tokenize(char *input, char **tokens) {
-    char *delim = " ";
-    char *word = strtok(input, delim);
-    int index = 0;
-
-    while (word != NULL) {
-        tokens[index++] = word;
-        word = strtok(NULL, delim);
+    if (strncmp(input, prefix1, strlen(prefix1)) == 0) {
+        strcpy(answer, input + strlen(prefix1));
+    } else if (strncmp(input, prefix2, strlen(prefix2)) == 0) {
+        strcpy(answer, input + strlen(prefix2));
+    } else {
+        strcpy(answer, ""); // Invalid input format
     }
-
-    tokens[index] = NULL;
 }
 
-// Displays the game results for each player, their name and final score, ranked from first to last place
-void show_results(player *players) {
-    // Sort players based on score
-    for (int i = 0; i < NUM_PLAYERS - 1; i++) {
-        for (int j = 0; j < NUM_PLAYERS - i - 1; j++) {
+// Displays the game results for each player, their name, and final score, ranked from first to last place
+void show_results(player *players, int num_players) {
+    // Sort players based on score (Descending Order)
+    for (int i = 0; i < num_players - 1; i++) {
+        for (int j = 0; j < num_players - i - 1; j++) {
             if (players[j].score < players[j + 1].score) {
                 player temp = players[j];
                 players[j] = players[j + 1];
@@ -45,10 +43,9 @@ void show_results(player *players) {
             }
         }
     }
-
     // Display results
     printf("\nFinal Scores:\n");
-    for (int i = 0; i < NUM_PLAYERS; i++) {
+    for (int i = 0; i < num_players; i++) {
         printf("%d. %s - $%d\n", i + 1, players[i].name, players[i].score);
     }
 }
@@ -91,7 +88,11 @@ int main() {
         category[strcspn(category, "\n")] = '\0';
 
         printf("Choose a value: ");
-        scanf("%d", &value);
+        if (scanf("%d", &value) != 1) {
+            printf("Invalid value. Try again.\n");
+            getchar(); // Consume leftover input
+            continue;
+        }
         getchar(); // Consume newline
 
         // Validate if question is already answered
@@ -106,31 +107,38 @@ int main() {
         fgets(buffer, BUFFER_LEN, stdin);
         buffer[strcspn(buffer, "\n")] = '\0';
 
-        // Validate answer
-        char *tokens[10];
-        tokenize(buffer, tokens);
-        
-        if (tokens[0] == NULL || (strcmp(tokens[0], "what") != 0 && strcmp(tokens[0], "who") != 0)) {
+        // Extract the actual answer
+        char answer[MAX_LEN];
+        tokenize(buffer, answer);
+
+        if (strlen(answer) == 0) {
             printf("Invalid format. Answers must start with 'what is' or 'who is'.\n");
             continue;
         }
 
         // Check correctness
-        if (valid_answer(category, value, tokens[2])) {
+        if (valid_answer(category, value, answer)) {
             printf("Correct!\n");
             update_score(players, NUM_PLAYERS, buffer, value);
         } else {
-            printf("Incorrect. The correct answer was: %s\n", questions[value / 100 - 1].answer);
+            // Find correct answer
+            for (int i = 0; i < NUM_QUESTIONS; i++) {
+                if (strcmp(questions[i].category, category) == 0 && questions[i].value == value) {
+                    printf("Incorrect. The correct answer was: %s\n", questions[i].answer);
+                    break;
+                }
+            }
         }
 
         // Mark question as answered
         for (int i = 0; i < NUM_QUESTIONS; i++) {
             if (strcmp(questions[i].category, category) == 0 && questions[i].value == value) {
                 questions[i].answered = true;
+                break;
             }
         }
 
-        // Check if game is over
+        // Check if all questions have been answered
         bool allAnswered = true;
         for (int i = 0; i < NUM_QUESTIONS; i++) {
             if (!questions[i].answered) {

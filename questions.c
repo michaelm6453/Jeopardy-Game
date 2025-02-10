@@ -75,14 +75,11 @@ bool valid_answer(char *category, int value, char *answer)
 }
 
 // Returns true if the question has already been answered
-bool already_answered(char *category, int value)
-{
-    for (int i = 0; i < NUM_QUESTIONS; ++i)
-    {
-        if (questions[i].value == value && strcmp(questions[i].category, category) == 0)
-        {
+bool already_answered(char *category, int value) {
+    for (int i = 0; i < NUM_QUESTIONS; i++) {
+        if (questions[i].value == value && strcmp(questions[i].category, category) == 0) {
             return questions[i].answered;
         }
     }
-    return true;
+    return false;
 }
