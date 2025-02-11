@@ -68,11 +68,11 @@ void display_categories(void) {
 void display_question(char *category, int value) {
     for (int i = 0; i < NUM_QUESTIONS; ++i) {
         if (questions[i].value == value && strcmp(questions[i].category, category) == 0) {
-            printf("For $%d: %s\n", questions[i].value, questions[i].question);
+            printf(ORANGE "For " BLUE "$%d" ORANGE": %s\n" RESET, questions[i].value, questions[i].question);
             return;
         }
     }
-    printf("No question found for category '%s' with value $%d.\n", category, value);
+    printf(BLUE "No question found for category '%s' with value $%d.\n" RESET, category, value);
 }
 
 // Returns true if the answer is correct for the question for that category and dollar value

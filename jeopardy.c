@@ -44,9 +44,9 @@ void show_results(player *players, int num_players) {
         }
     }
     // Display results
-    printf("\nFinal Scores:\n");
+    printf("\n" ORANGE "Final Scores:\n" RESET);
     for (int i = 0; i < num_players; i++) {
-        printf("%d. %s - $%d\n", i + 1, players[i].name, players[i].score);
+        printf(BLUE "%d. %s - " ORANGE "$%d\n" RESET, i + 1, players[i].name, players[i].score);
     }
 }
 
@@ -61,9 +61,9 @@ int main() {
     initialize_game();
 
     // Get player names
-    printf("Enter player names:\n");
+    printf(ORANGE "Enter player names:\n" RESET);
     for (int i = 0; i < NUM_PLAYERS; i++) {
-        printf("Player %d: ", i + 1);
+        printf(BLUE "Player %d: " RESET, i + 1);
         fgets(players[i].name, MAX_LEN, stdin);
         players[i].name[strcspn(players[i].name, "\n")] = '\0';
         players[i].score = 0;
@@ -75,7 +75,7 @@ int main() {
         display_categories();
 
         // Ask player to choose a category and value
-        printf("Enter player's name: ");
+        printf(ORANGE "Enter player's name: " RESET);
         fgets(player_name, MAX_LEN, stdin);
         player_name[strcspn(player_name, "\n")] = '\0';
 
@@ -85,13 +85,13 @@ int main() {
         }
 
 
-        printf("Choose a category: ");
+        printf(ORANGE "Choose a category: " RESET);
         fgets(category, MAX_LEN, stdin);
         category[strcspn(category, "\n")] = '\0';
 
-        printf("Choose a value: ");
+        printf(ORANGE "Choose a value: " RESET);
         if (scanf("%d", &value) != 1) {
-            printf("Invalid value. Try again.\n");
+            printf(BLUE "Invalid value. Try again.\n" RESET);
             getchar(); // Consume leftover input
             continue;
         }
@@ -120,13 +120,13 @@ int main() {
 
         // Check correctness
         if (valid_answer(category, value, answer)) {
-            printf("Correct!\n");
-            update_score(players, NUM_PLAYERS, player_name, value);
+            printf(BLUE "Correct!\n" RESET);
+            update_score(players, NUM_PLAYERS, buffer, value);
         }else {
             // Find correct answer
             for (int i = 0; i < NUM_QUESTIONS; i++) {
                 if (strcmp(questions[i].category, category) == 0 && questions[i].value == value) {
-                    printf("Incorrect. The correct answer was: %s\n", questions[i].answer);
+                    printf(ORANGE"Incorrect."BLUE" The correct answer was: %s\n"RESET, questions[i].answer);
                     break;
                 }
             }
