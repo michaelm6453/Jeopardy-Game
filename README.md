@@ -9,6 +9,6 @@
 | Michael Morra      | 100815372   | [michaelm6453](https://github.com/michaelm6453) |
 | Saieason Sritharan | 100741389   | [SaieasonSritharan](https://github.com/SaieasonSritharan) |
 | Cam Edwards        | 100779399   | [CamEdwards8](https://github.com/CamEdwards8)  |
-| Destiny Mekwunye   | 100825222   | -                   |
+| Destiny Mekwunye   | 100825222   | [kingdmex](https://github.com/kingdmex) |
 
 
