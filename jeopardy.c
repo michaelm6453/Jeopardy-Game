@@ -121,7 +121,7 @@ int main() {
         // Check correctness
         if (valid_answer(category, value, answer)) {
             printf("Correct!\n");
-            update_score(players, NUM_PLAYERS, buffer, value);
+            update_score(players, NUM_PLAYERS, player_name, value);
         }else {
             // Find correct answer
             for (int i = 0; i < NUM_QUESTIONS; i++) {
