@@ -5,6 +5,10 @@
  * All rights reserved.
  *
  */
+ 
+#define RESET "\x1B[0m"
+#define ORANGE "\x1B[38;5;208m"
+#define BLUE "\x1B[34m"
 #ifndef JEOPARDY_H_
 #define JEOPARDY_H_
 

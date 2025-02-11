@@ -6,6 +6,10 @@
  * All rights reserved.
  *
  */
+#define RESET "\x1B[0m"
+#define ORANGE "\x1B[38;5;208m"
+#define BLUE "\x1B[34m"
+
 #ifndef QUESTIONS_H_
 #define QUESTIONS_H_
 
