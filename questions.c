@@ -14,6 +14,12 @@
 
 question questions[NUM_QUESTIONS];
 
+char categories[NUM_CATEGORIES][MAX_LEN] = {
+    "programming",
+    "algorithms",
+    "databases"
+};
+
 // Initializes the array of questions for the game
 void initialize_game(void)
 {
@@ -37,24 +43,35 @@ void initialize_game(void)
 
 // Displays each of the remaining categories and question dollar values that have not been answered
 void display_categories(void) {
-    printf("Available categories:\n");
+    printf("These are the list of questions left to answer:\n");
+
     for (int i = 0; i < NUM_CATEGORIES; i++) {
-        printf("%s\n", categories[i]);
+        int has_questions = 0;
+        for (int j = 0; j < NUM_QUESTIONS; j++) {
+            if (strcmp(questions[j].category, categories[i]) == 0 && !questions[j].answered) {
+                if (!has_questions) {
+                    printf("%s:\n", categories[i]);
+                    has_questions = 1;
+                }
+                printf("   $%d -> %s\n", questions[j].value, questions[j].question);
+            }
+        }
+        if (has_questions) {
+            printf("\n");
+        }
     }
 }
 
 
 // Displays the question for the category and dollar value
-void display_question(char *category, int value)
-{
-    for (int i = 0; i < NUM_QUESTIONS; ++i)
-    {
-        if (questions[i].value == value && strcmp(questions[i].category, category) == 0)
-        {
-            printf("Question for $%d: %s\n", value, questions[i].question);
+void display_question(char *category, int value) {
+    for (int i = 0; i < NUM_QUESTIONS; ++i) {
+        if (questions[i].value == value && strcmp(questions[i].category, category) == 0) {
+            printf("For $%d: %s\n", questions[i].value, questions[i].question);
             return;
         }
     }
+    printf("No question found for category '%s' with value $%d.\n", category, value);
 }
 
 // Returns true if the answer is correct for the question for that category and dollar value
@@ -64,7 +81,7 @@ bool valid_answer(char *category, int value, char *answer)
     {
         if (questions[i].value == value && strcmp(questions[i].category, category) == 0)
         {
-            return strcmp(questions[i].answer, answer) == 0;
+            return strcasecmp(questions[i].answer, answer) == 0;
         }
     }
     return false;
@@ -77,5 +94,5 @@ bool already_answered(char *category, int value) {
             return questions[i].answered;
         }
     }
-    return false;
+    return true;
 }
