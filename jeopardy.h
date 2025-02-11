@@ -16,7 +16,7 @@ void tokenize(char *input, char *answer);
 
 // Displays the game results for each player, their name and final score, ranked from first to last place
 
-void tokenize(char *input, char *answer);
+void show_results(player *players, int num_players);
 void initialize_game(void);
 
 #endif /* JEOPARDY_H_ */

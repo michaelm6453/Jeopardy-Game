@@ -150,6 +150,6 @@ int main() {
     }
 
     // Show final results
-    show_results(players);
+    show_results(players,NUM_PLAYERS);
     return EXIT_SUCCESS;
 }

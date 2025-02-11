@@ -36,17 +36,13 @@ void initialize_game(void)
 }
 
 // Displays each of the remaining categories and question dollar values that have not been answered
-void display_categories(void)
-{
-    printf("Available categories and values:\n");
-    for (int i = 0; i < NUM_QUESTIONS; ++i)
-    {
-        if (!questions[i].answered)
-        {
-            printf("Category: %s, Value: $%d\n", questions[i].category, questions[i].value);
-        }
+void display_categories(void) {
+    printf("Available categories:\n");
+    for (int i = 0; i < NUM_CATEGORIES; i++) {
+        printf("%s\n", categories[i]);
     }
 }
+
 
 // Displays the question for the category and dollar value
 void display_question(char *category, int value)
