@@ -1,7 +1,7 @@
 /*
  * Tutorial 4 Jeopardy Project for SOFE 3950U / CSCI 3020U: Operating Systems
  *
- * Copyright (C) 2015, <GROUP MEMBERS>
+ * Copyright (C) 2015, < Michael Morra, Saieason Sritharan, Cam Edwards, Destiny Mekwunye>
  * All rights reserved.
  *
  */
@@ -54,6 +54,7 @@ int main() {
     player players[NUM_PLAYERS];
     char buffer[BUFFER_LEN];
     char category[MAX_LEN];
+    char player_name[MAX_LEN];
     int value;
     
     // Initialize the game
@@ -75,13 +76,14 @@ int main() {
 
         // Ask player to choose a category and value
         printf("Enter player's name: ");
-        fgets(buffer, BUFFER_LEN, stdin);
-        buffer[strcspn(buffer, "\n")] = '\0';
+        fgets(player_name, MAX_LEN, stdin);
+        player_name[strcspn(player_name, "\n")] = '\0';
 
-        if (!player_exists(players, NUM_PLAYERS, buffer)) {
-            printf("Invalid player name. Try again.\n");
-            continue;
+        if (!player_exists(players, NUM_PLAYERS, player_name)) {
+        printf("Invalid player name. Try again.\n");
+        continue;
         }
+
 
         printf("Choose a category: ");
         fgets(category, MAX_LEN, stdin);
@@ -120,7 +122,7 @@ int main() {
         if (valid_answer(category, value, answer)) {
             printf("Correct!\n");
             update_score(players, NUM_PLAYERS, buffer, value);
-        } else {
+        }else {
             // Find correct answer
             for (int i = 0; i < NUM_QUESTIONS; i++) {
                 if (strcmp(questions[i].category, category) == 0 && questions[i].value == value) {
