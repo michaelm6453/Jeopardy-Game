@@ -26,8 +26,12 @@ bool player_exists(player *players, int num_players, char *name) {
 void update_score(player *players, int num_players, char *name, int score) {
     for (int i = 0; i < num_players; ++i) {
         if (strcmp(players[i].name, name) == 0) {
+            printf("Updating score for: %s, adding %d points\n", players[i].name, score);
             players[i].score += score;
+            printf("New score for %s: %d\n", players[i].name, players[i].score);
             return;
         }
     }
+    printf("Error: Player %s not found\n", name);
 }
+
