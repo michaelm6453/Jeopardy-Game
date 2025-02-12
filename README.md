@@ -21,3 +21,9 @@ How to play:
 4. Scores update: Correct answers earn points, incorrect ones reveal the correct answer.
 5. Game ends when all questions are answered, and final rankings are displayed.
 
+Features and Improvements
+Game Logic: Players select categories and values, answer questions, and update scores accordingly.
+Error Handling: Prevents duplicate answers and ensures correct input format.
+Colored Output: Uses ANSI escape codes for better readability (Orange for important text, Blue for player details).
+Git Workflow: Used feature branches and pull requests to merge new features while preserving bug fixes safely.
+
